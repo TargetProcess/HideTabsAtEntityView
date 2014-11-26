@@ -41,7 +41,7 @@ tau
 
             var entityData = renderData.view.config.entity;
             var $el = renderData.element;
-            var tabs = tabsToHide[entityData.type.toLowerCase()];
+            var tabs = tabsToHide[entityData.type ? entityData.type.toLowerCase() : entityData.toLowerCase()];
 
             if (tabs) {
                 tabs.forEach(function(tabLabel) {
