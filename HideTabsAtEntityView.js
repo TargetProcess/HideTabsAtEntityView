@@ -37,11 +37,8 @@ tau
             $el.find('.i-role-tabheader[data-label=' + label + ']').hide();
         };
 
-        var hideTabs = function(e, renderData) {
-
-            var entityData = renderData.view.config.entity;
-            var $el = renderData.element;
-            var tabs = tabsToHide[entityData.type ? entityData.type.toLowerCase() : entityData.toLowerCase()];
+        var hideTabs = function($el, entityType) {
+            var tabs = tabsToHide[entityType.toLowerCase()];
 
             if (tabs) {
                 tabs.forEach(function(tabLabel) {
@@ -50,8 +47,22 @@ tau
             }
         };
 
-        addBusListener('entity_page', 'afterRender', hideTabs);
-        addBusListener('entity component', 'afterRender', hideTabs);
-        addBusListener('tau/components/component.page.entity', 'afterRender', hideTabs);
+        var listener = function(e, renderData) {
+            var entityData = renderData.view.config.entity;
+            var $el = renderData.element;
+            var type = entityData.type ? entityData.type.toLowerCase() : entityData.toLowerCase();
+
+            hideTabs($el, type);
+        };
+
+        addBusListener('entity_page', 'afterRender', listener);
+        addBusListener('entity component', 'afterRender', listener);
+        addBusListener('tau/components/component.page.entity', 'afterRender', listener);
+        addBusListener('entity container', 'afterRenderAll', function(e, data) {
+            var type = data.view.config.context.entity.entityType.name;
+            var $el = data.element;
+
+            hideTabs($el, type);
+        });
 
     });
