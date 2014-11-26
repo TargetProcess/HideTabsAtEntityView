@@ -1,0 +1,6 @@
+{
+    "ShortDescription": "Mashup to hide tabs at entity view",
+    "CompatibleTpVersion": {
+        "Minimum": "2.23.0"
+    }
+}

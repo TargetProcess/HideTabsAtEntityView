@@ -1,0 +1,10 @@
+# HideTabsAtEntityView Mashup
+
+## Description
+
+Mashup to hide tabs at entity view
+
+## Requirements
+
+TP version >=2.23.0
+
